@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Jeu du pendu</title>
+</head>
+<body>
+    <div class="container">
+        <img onclick="launchMusic()" class="batLeft" src="https://www.animatedimages.org/data/media/196/animated-bat-image-0027.gif" border="0" alt="animated-bat-image" />
+    
+        <header>
+            <h1>( Le jeu du zombie pas pendu )</h1>
+            <button onclick="startGame()" id="launchBtn" class="active launchBtn">
+               Lancer le jeu
+            </button>
+        </header>
+
+        <section id="game" class="inactive">
+            <div class="card">
+                <div id="status" class="status">
+                    <div class="statusCard">
+                        <form onsubmit="handleSubmit(event)">
+                            <input type="text" name="findWord" id="findWord" placeholder="Vous avez la réponse ?">
+                            <button type="submit"><i class="bi bi-send-fill"></i></button>
+                        </form>
+                    </div>
+                    <div id="life" class="statusCard"></div>
+                </div>
+                <div id="hiddenWord" class="hiddenWord"></div>
+                <div id="zombie" class="zombie"></div>
+                <div id="keyboard" class="keyboard"></div>
+            </div>
+        </section>
+
+        <section id="winOrLoose" class="inactive">
+            <h2 id="winOrLooseText"></h2>
+            <button>Rejouer ???</button>
+        </section>
+    </div>
+
+    <script src="game.js"></script>
+    <script src="audio.js"></script>
+    <script src="ui.js"></script>
+    <script src="hangsman.js"></script>
+</body>
+</html>
