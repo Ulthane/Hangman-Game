@@ -18,12 +18,13 @@ function launchMusic() {
 
 function handleSubmit(event) {
     event.preventDefault();
-    
-    game.verifyInputResponse(
-        document.querySelector("#findWord").value, 
+
+    game.verifyResponse(
+        event, 
+        interface.setHiddenWord, 
         interface.setZombieImg, 
         interface.setLife, 
-        audio, 
+        audio,
         interface.setWinOrLoose,
         interface.setActive,
         interface.setInactive
