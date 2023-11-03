@@ -13,8 +13,8 @@
     
         <header>
             <h1>( Le jeu du zombie pas pendu )</h1>
-            <button onclick="startGame()" id="launchBtn" class="active launchBtn">
-               Lancer le jeu
+            <button onclick="startGame()" id="launchBtn" class="launchBtn">
+                Lancer le jeu
             </button>
         </header>
 
@@ -30,20 +30,20 @@
                     <div id="life" class="statusCard"></div>
                 </div>
                 <div id="hiddenWord" class="hiddenWord"></div>
-                <div id="zombie" class="zombie"></div>
+                <div id="zombie" class="zombie"><img id="zombieImg" src="" alt="Zombie"></div>
                 <div id="keyboard" class="keyboard"></div>
             </div>
         </section>
 
         <section id="winOrLoose" class="inactive">
+            <button onclick="startGame()" id="retry" class="launchBtn">Rejouer ???</button>
             <h2 id="winOrLooseText"></h2>
-            <button>Rejouer ???</button>
         </section>
     </div>
 
-    <script src="game.js"></script>
+    <script src="engine.js"></script>
     <script src="audio.js"></script>
     <script src="ui.js"></script>
-    <script src="hangsman.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>

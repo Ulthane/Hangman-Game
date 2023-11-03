@@ -9,17 +9,18 @@ class Audio {
         this.loose;
         this.win;
         this.music;
-        this.oldRandom;
+        this.oldRandom = 0;
+        this.random = 0;
     }
 
     // METHOD
     setAudio() {
         function createSound(name) {
-            const audio = document.createElement("audio");
-            audio.src = `./assets/audio/${name}.mp3`;
-            audio.id = name;
+            const audio = document.createElement("audio"); // On créer un élément audio
+            audio.src = `./assets/audio/${name}.mp3`; // On vient ajouter la source
+            audio.id = name; // On lui ajoute un ID pour le retrouver plus tard
             
-            document.body.append(audio);
+            document.body.append(audio); // Puis on l'ajoute a la fin du body
         }
 
         // Créer les sons de zombie
@@ -42,27 +43,27 @@ class Audio {
     }
 
     // GETTER
-    playMusic() {
-        this.music.play();
+    getMusic() {
+        return this.music;
     }
 
-    playSuccess() {
-        this.success.play();
+    getSuccess() {
+        return this.success;
     }
 
-    playLoose() {
-        this.loose.play();
+    getLoose() {
+        return this.loose;
     }
 
-    playZombieSound() {
-        // Random avec min et max
-        const random = Math.round(1 + Math.random() * ((this.zombieSound.length - 1) - 1));
-        
-        if (!this.oldRandom || random !== this.oldRandom) {
-            this.oldRandom = random;
-            this.zombieSound[random].play();
-        } else {
-            this.playZombieSound();
+    getZombie() {
+        // Tant qu'on ne choisi pas un son différent de la fois d'avant, on continue de séléction un nouveau son
+        while (random === this.oldRandom) {
+            console.log("Régènere un son");
+            random = Math.round(1 + Math.random() * ((this.zombieSound.length - 1) - 1)); // Random avec min et max
+            console.log("Zombie sound :" + random)
         }
+        
+        this.oldRandom = random;
+        return this.zombieSound[random];
     }
 }
