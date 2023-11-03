@@ -15,23 +15,24 @@ function launchMusic() {
 function handleSubmit(event) {
     event.preventDefault(); // On bloque l'envoi du formulaire
 
-    // !!! AJOUTER UNE VERIFICATION SI NULL !!! //
+    // On vérifie que l'on a entré une valeur dans le champs
+    if (document.querySelector("input").value) {
+        // On vérifie la réponse
+        game.verifyResponse(
+            event,
+            interface.setHiddenWord,
+            interface.setZombieImg,
+            interface.setLife,
+            interface.setWinOrLoose,
+            interface.setActive,
+            interface.setInactive,
+            audio.getSuccess(),
+            audio.getZombie()
+        );
 
-    // On vérifie la réponse
-    game.verifyResponse(
-        event,
-        interface.setHiddenWord,
-        interface.setZombieImg,
-        interface.setLife,
-        interface.setWinOrLoose,
-        interface.setActive,
-        interface.setInactive,
-        audio.getSuccess(),
-        audio.getZombie()
-    );
-
-    // On remet l'input à zéro
-    document.querySelector('input').value = '';
+        // On remet l'input à zéro
+        document.querySelector('input').value = '';
+    }
 }
 
 // Fonction qui démarre la partie

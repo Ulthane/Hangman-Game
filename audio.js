@@ -57,11 +57,12 @@ class Audio {
 
     getZombie() {
         // Tant qu'on ne choisi pas un son différent de la fois d'avant, on continue de séléction un nouveau son
-        while (random === this.oldRandom) {
-            random = Math.round(1 + Math.random() * ((this.zombieSound.length - 1) - 1)); // Random avec min et max
+        while (this.random === this.oldRandom) {
+            console.log("test")
+            this.random = Math.round(1 + Math.random() * ((this.zombieSound.length - 1) - 1)); // Random avec min et max
         }
         
-        this.oldRandom = random;
-        return this.zombieSound[random];
+        this.oldRandom = this.random;
+        return this.zombieSound[this.random];
     }
 }

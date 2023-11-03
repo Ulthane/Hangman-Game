@@ -24,6 +24,9 @@ class Game {
                         this.word = words[i].name.split('');
                         this.wordLength = words[i].name.length;
 
+                        // On set le champs qui montrera la réponse
+                        document.querySelector('#response').textContent = `Le mot était ${words[i].name}`;
+
                         break;
                     }
                 }
