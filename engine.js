@@ -4,32 +4,6 @@ class Game {
         this.paramLife = 7;
 
         // Init
-        this.wordsList = [
-            'whisky',
-            'porte',
-            'halloween',
-            'squelette',
-            'pomme',
-            'langue',
-            'ordinateur',
-            'silence',
-            'jour',
-            'code',
-            'pantalon',
-            'telephone',
-            'tasse',
-            'enceinte',
-            'console',
-            'appartement',
-            'policier',
-            'casque',
-            'cinema',
-            'heros',
-            'yaourt',
-            'telecommande',
-            'coeur'
-        ];
-
         this.word = [];
         this.wordLength = 0;
         this.life = this.paramLife;
@@ -37,17 +11,24 @@ class Game {
 
     // SETTER
     setGeneratedWord() {
-        // let randomWord = this.wordsList[Math.round(Math.random() * this.wordsList.length)];
-        // this.word = randomWord.split('');
+        // Regex qui détecte les accents
+        var regex = new RegExp(/([à-ü]|[À-Ü])/g);
 
-        return fetch('https://trouve-mot.fr/api/random/1')
+        // On demande à l'api de nous donner plusieurs mot, puis on controle que le mot n'a pas d'accent pour le sélectionner
+        return fetch('https://trouve-mot.fr/api/random/10')
             .then((response) => response.json())
             .then((words) => {
-                this.word = words[0].name.split('');
-                this.wordLength = words[0].name.length;
+                for (let i = 0; i < words.length; i++) {
+                    const specialCharExist = words[i].name.match(regex) ? true : false;
+                    if (!specialCharExist) {
+                        this.word = words[i].name.split('');
+                        this.wordLength = words[i].name.length;
 
-                return;
-            });
+                        break;
+                    }
+                }
+            })
+            .catch((e) => console.log(e));
     }
 
     setLife() {
@@ -56,7 +37,6 @@ class Game {
 
     // GETTER
     getGeneratedWord() {
-        console.log(this.word);
         return this.word;
     }
 
@@ -68,8 +48,8 @@ class Game {
     async resetGame() {
         this.word = [];
         this.life = this.paramLife;
-        console.log('Je passe');
-        return await this.setGeneratedWord();
+
+        await this.setGeneratedWord();
     }
 
     verifyResponse(event, setHiddenWord, setZombie, setUILife, setWinOrLoose, setActive, setInactive, audioSucces, audioZombie) {
@@ -124,13 +104,8 @@ class Game {
             }
 
             if (this.wordLength === 0) {
-                console.log('Tu a gagnez !');
                 endGame('gagnez');
             }
-            console.log('Nombre de lettre restante : ' + this.wordLength);
         }
-
-        // On controle le nombre de vie restante, si 0 on perd
-        console.log('Nombre de vie restante : ' + this.life);
     }
 }
